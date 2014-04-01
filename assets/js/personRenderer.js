@@ -30,7 +30,7 @@ var treeRenderers = (function(module) {
 
     // add the gender icon
     if (!options.hideIcon) {
-      icon = 'fs-icon-' + (options.iconSize || 'medium') + '-' + person.gender.toLowerCase();
+      icon = 'fs-icon-' + (options.iconSize || 'medium') + '-' + (person.gender || 'unknown').toLowerCase();
 
       el = document.createElement('div');
       el.className = 'person-gender-icon ' + icon;
@@ -80,6 +80,44 @@ var treeRenderers = (function(module) {
 
     // return as html
     return personContainer;
+  };
+
+  /**
+   * Couple a person.
+   * @requires renderCouple
+   * @type {object} person1 - Top couple person to render.
+   * @param {string} [person.name]
+   * @param {string} [person.gender]
+   * @param {string} [person.lifeSpan]
+   * @param {string} [person.fullLifeSpan]
+   * @param {string} [person.id]
+   *
+   * @type {object} person2 - Bottom couple person to render.
+   * @param {string} [person.name]
+   * @param {string} [person.gender]
+   * @param {string} [person.lifeSpan]
+   * @param {string} [person.fullLifeSpan]
+   * @param {string} [person.id]
+   *
+   * @type {object} options - How to display the person information.
+   * @param {string}  [options.iconSize=medium] - Size of the gender icon (small,medium,large).
+   * @param {boolean} [options.hideLifeSpan=false] - Hide the lifespan.
+   * @param {string}  [options.lifeSpan=short] - Show the short or the full lifeSpan.
+   * @param {boolean} [options.hidePid=false] - Hide the person id.
+   * @param {string}  [options.returnType=html] - Specify the return type as HTML or string.
+   */
+  module.renderCouple = function(person1, person2, options) {
+    var coupleTop = this.renderPerson(person1, options);
+    var coupleBottom = this.renderPerson(person2, options);
+
+    coupleTop.className += ' couple-husband';
+    coupleBottom.className += ' couple-wife';
+
+    var el = document.createElement('div');
+    el.appendChild(coupleTop);
+    el.appendChild(coupleBottom);
+
+    return el;
   };
 
   return module;
