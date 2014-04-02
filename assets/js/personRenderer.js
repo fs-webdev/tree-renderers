@@ -25,7 +25,7 @@ var treeRenderers = (function(module) {
     var options = options || {};
 
     var $personContainer = $('<div class="person-info-container"></div>');
-    var $personInfo = $('<ul person-info></ul>');
+    var $personInfo = $('<ul class="person-info"></ul>');
     var icon, gender, lifeSpan, $el, $link;
 
     // create the gender div
