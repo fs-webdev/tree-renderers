@@ -2,6 +2,8 @@ var treeRenderers = (function(module) {
 
   /**
    * Render a person.
+   * @param {DOMElement} container - Container element to append the person information to.
+   *
    * @type {object} person - Person to render.
    * @param {string} [person.name]
    * @param {string} [person.gender]
@@ -14,9 +16,10 @@ var treeRenderers = (function(module) {
    * @param {boolean} [options.hideLifeSpan=false] - Hide the lifespan.
    * @param {string}  [options.lifeSpan=short] - Show the short or the full lifeSpan.
    * @param {boolean} [options.hidePid=false] - Hide the person id.
-   * @param {string}  [options.returnType=html] - Specify the return type as HTML or string.
+   *
+   * @returns {DOMElement} Returns the HTML if no container element is passed, otherwise returns nothing.
    */
-  module.renderPerson = function(person, options) {
+  module.renderPerson = function(container, person, options) {
     var person = person || {};
     var options = options || {};
 
@@ -71,20 +74,18 @@ var treeRenderers = (function(module) {
     personInfo.appendChild(docFrag);
     personContainer.appendChild(personInfo);
 
-    // return as string
-    if (options.returnType === 'string') {
-      el = document.createElement('div');
-      el.appendChild(personContainer);
-      return el.innerHTML;
+    if (!container) {
+      return personContainer;
     }
 
-    // return as html
-    return personContainer;
+    container.appendChild(personContainer);
   };
 
   /**
    * Couple a person.
    * @requires renderCouple
+   * @param {DOMElement} container - Parent element to append the person information to.
+   *
    * @type {object} person1 - Top couple person to render.
    * @param {string} [person.name]
    * @param {string} [person.gender]
@@ -105,19 +106,26 @@ var treeRenderers = (function(module) {
    * @param {string}  [options.lifeSpan=short] - Show the short or the full lifeSpan.
    * @param {boolean} [options.hidePid=false] - Hide the person id.
    * @param {string}  [options.returnType=html] - Specify the return type as HTML or string.
+   *
+   * @returns {DOMElement} Returns the HTML if no container element is passed, otherwise returns nothing.
    */
-  module.renderCouple = function(person1, person2, options) {
+  module.renderCouple = function(container, person1, person2, options) {
     var coupleTop = this.renderPerson(person1, options);
     var coupleBottom = this.renderPerson(person2, options);
 
     coupleTop.className += ' couple-husband';
     coupleBottom.className += ' couple-wife';
 
-    var el = document.createElement('div');
-    el.appendChild(coupleTop);
-    el.appendChild(coupleBottom);
+    if (!container) {
+      var el = document.createElement('div');
+      el.appendChild(coupleTop);
+      el.appendChild(coupleBottom);
 
-    return el;
+      return el;
+    }
+
+    container.appendChild(coupleTop);
+    container.appendChild(coupleBottom)
   };
 
   return module;
