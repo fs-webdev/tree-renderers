@@ -74,17 +74,9 @@ var treeRenderers = (function(module) {
     personInfo.appendChild(docFrag);
     personContainer.appendChild(personInfo);
 
-    // DOMElement
-    if (container && container.appendChild) {
-      container.appendChild(personContainer);
-    }
-    // jQueryElement
-    else if (container && container.append) {
+    // container not null
+    if (container = $(container)) {
       container.append(personContainer);
-    }
-    // querySelector
-    else if (container && document.querySelector(container)) {
-      document.querySelector(container).appendChild(personContainer);
     }
     else {
       return personContainer;
@@ -126,20 +118,10 @@ var treeRenderers = (function(module) {
     coupleTop.className += ' couple-husband';
     coupleBottom.className += ' couple-wife';
 
-    // DOMElement
-    if (container && container.appendChild) {
-      container.appendChild(coupleTop);
-      container.appendChild(coupleBottom)
-    }
-    // jQueryElement
-    else if (container && container.append) {
+    // container not null
+    if (container = $(container)) {
       container.append(coupleTop);
       container.append(coupleBottom)
-    }
-    // querySelector
-    else if (container && document.querySelector(container)) {
-      document.querySelector(container).appendChild(coupleTop);
-      document.querySelector(container).appendChild(coupleBottom)
     }
     else {
       var el = document.createElement('div');
