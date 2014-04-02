@@ -2,7 +2,7 @@ var treeRenderers = (function(module) {
 
   /**
    * Render a person.
-   * @param {DOMElement} container - Container element to append the person information to.
+   * @param {[DOMElement, jQueryElement, querySelector]} container - Parent element to append the person information to.
    *
    * @type {object} person - Person to render.
    * @param {string} [person.name]
@@ -74,17 +74,27 @@ var treeRenderers = (function(module) {
     personInfo.appendChild(docFrag);
     personContainer.appendChild(personInfo);
 
-    if (!container) {
+    // DOMElement
+    if (container.appendChild) {
+      container.appendChild(personContainer);
+    }
+    // jQueryElement
+    else if (container.append) {
+      container.append(personContainer);
+    }
+    // querySelector
+    else if (document.querySelector(container)) {
+      document.querySelector(container).appendChild(personContainer);
+    }
+    else {
       return personContainer;
     }
-
-    container.appendChild(personContainer);
   };
 
   /**
    * Couple a person.
    * @requires renderCouple
-   * @param {DOMElement} container - Parent element to append the person information to.
+   * @param {[DOMElement, jQueryElement, querySelector]} container - Parent element to append the person information to.
    *
    * @type {object} person1 - Top couple person to render.
    * @param {string} [person.name]
@@ -116,16 +126,28 @@ var treeRenderers = (function(module) {
     coupleTop.className += ' couple-husband';
     coupleBottom.className += ' couple-wife';
 
-    if (!container) {
+    // DOMElement
+    if (container.appendChild) {
+      container.appendChild(coupleTop);
+      container.appendChild(coupleBottom)
+    }
+    // jQueryElement
+    else if (container.append) {
+      container.append(coupleTop);
+      container.append(coupleBottom)
+    }
+    // querySelector
+    else if (document.querySelector(container)) {
+      document.querySelector(container).appendChild(coupleTop);
+      document.querySelector(container).appendChild(coupleBottom)
+    }
+    else {
       var el = document.createElement('div');
       el.appendChild(coupleTop);
       el.appendChild(coupleBottom);
 
       return el;
     }
-
-    container.appendChild(coupleTop);
-    container.appendChild(coupleBottom)
   };
 
   return module;
