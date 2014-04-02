@@ -75,7 +75,7 @@ var treeRenderers = (function(module) {
     personContainer.appendChild(personInfo);
 
     // container not null
-    if (container = $(container)) {
+    if ((container = $(container)).length) {
       container.append(personContainer);
     }
     else {
@@ -119,7 +119,7 @@ var treeRenderers = (function(module) {
     coupleBottom.className += ' couple-wife';
 
     // container not null
-    if (container = $(container)) {
+    if ((container = $(container)).length) {
       container.append(coupleTop);
       container.append(coupleBottom)
     }
