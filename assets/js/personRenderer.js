@@ -48,7 +48,7 @@ var treeRenderers = (function(module) {
 
         // only add valid name wrappers
         if (options.nameWrapper && validNameWrappers.indexOf(options.nameWrapper) !== -1) {
-          $name = $('<' + nameWrapper + '></' + nameWrapper + '>');
+          $name = $('<' + options.nameWrapper + '></' + options.nameWrapper + '>');
           $name.html(person.name);
         }
         else {
