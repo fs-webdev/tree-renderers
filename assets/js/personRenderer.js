@@ -16,6 +16,7 @@ var treeRenderers = (function(module) {
    * @param {boolean} [options.hideLifeSpan=false] - Hide the lifespan.
    * @param {string}  [options.lifeSpan=short] - Show the short or the full lifeSpan.
    * @param {boolean} [options.hidePid=false] - Hide the person id.
+   * @param {boolean} [options.openPersonCard=false] - Add a link to open the person card when the name is clicked.
    *
    * @returns {DOMElement} Returns the HTML if no container element is passed, otherwise returns nothing.
    */
@@ -23,33 +24,34 @@ var treeRenderers = (function(module) {
     var person = person || {};
     var options = options || {};
 
-    var personContainer = document.createElement('div');
-    var personInfo = document.createElement('ul');
-    var docFrag = document.createDocumentFragment();
-    var icon, gender, lifeSpan, el;
-
-    personContainer.className = 'person-info-container';
-    personInfo.className = 'person-info';
+    var $personContainer = $('<div class="person-info-container"></div>');
+    var $personInfo = $('<ul person-info></ul>');
+    var icon, gender, lifeSpan, $el, $link;
 
     // create the gender div
-    el = document.createElement('div');
-    el.className = 'person-gender-icon';
+    $el = $('<div class="person-gender-icon"></div>');
 
     // only create the person if the object exists
     if (person && Object.keys(person).length > 0) {
       // add the gender icon
       if (!options.hideIcon) {
         icon = 'fs-icon-' + (options.iconSize || 'medium') + '-' + (person.gender || 'unknown').toLowerCase();
-        el.className += ' ' + icon;
+        $el.addClass(icon);
       }
-      personContainer.appendChild(el);
+      $personContainer.append($el);
 
       // add the person name
       if (person.name) {
-        el = document.createElement('li');
-        el.className = 'person-name';
-        el.textContent = person.name;
-        docFrag.appendChild(el);
+        $el = $('<li class="person-name"></li>');
+
+        // create the link to open the person card
+        if (options.openPersonCard) {
+          $link = $('<a href="javascript:void(0);" data-cmd="openPersonCard">' + person.name + '</a>');
+        }
+        else {
+          $el.html(person.name);
+        }
+        $personInfo.append($el);
       }
 
       // add the lifespan
@@ -61,34 +63,29 @@ var treeRenderers = (function(module) {
           lifeSpan = person.lifeSpan;
         }
 
-        el = document.createElement('li');
-        el.className = 'person-lifeSpan';
-        el.textContent = lifeSpan
-        docFrag.appendChild(el);
+        $el = $('<li class="person-lifeSpan">' + lifeSpan + '</li>');
+        $personInfo.append($el);
       }
 
       // add the pid
       if (!options.hidePid && person.id) {
-        el = document.createElement('li');
-        el.className = 'person-id';
-        el.textContent = person.id;
-        docFrag.appendChild(el);
+        $el = $('<li class="person-id">' + person.id + '</li>');
+        $personInfo.append($el);
       }
 
-      personInfo.appendChild(docFrag);
-      personContainer.appendChild(personInfo);
+     $personContainer.append($personInfo);
     }
     // just add the gender div
     else {
-      personContainer.appendChild(el);
+      $personContainer.append($el);
     }
 
     // container not null
     if ((container = $(container)).length) {
-      container.append(personContainer);
+      container.append($personContainer);
     }
     else {
-      return personContainer;
+      return $personContainer[0];
     }
   };
 
