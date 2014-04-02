@@ -26,53 +26,62 @@ var treeRenderers = (function(module) {
     var personContainer = document.createElement('div');
     var personInfo = document.createElement('ul');
     var docFrag = document.createDocumentFragment();
-    var icon, lifeSpan, el;
+    var icon, gender, lifeSpan, el;
 
     personContainer.className = 'person-info-container';
     personInfo.className = 'person-info';
 
-    // add the gender icon
+    // create the gender div
     el = document.createElement('div');
     el.className = 'person-gender-icon';
-    if (!options.hideIcon) {
-      icon = 'fs-icon-' + (options.iconSize || 'medium') + '-' + (person.gender || 'unknown').toLowerCase();
-      el.className += ' ' + icon;
-    }
-    personContainer.appendChild(el);
 
-    // add the person name
-    if (person.name) {
-      el = document.createElement('li');
-      el.className = 'person-name';
-      el.textContent = person.name;
-      docFrag.appendChild(el);
-    }
-
-    // add the lifespan
-    if (!options.hideLifeSpan && (person.fullLifeSpan || person.lifeSpan)) {
-      if (options.lifeSpan === 'full' && person.fullLifeSpan) {
-        lifeSpan = person.fullLifeSpan;
+    // only create the person if the object exists
+    if (person && Object.keys(person).length > 0) {
+      // add the gender icon
+      if (!options.hideIcon) {
+        icon = 'fs-icon-' + (options.iconSize || 'medium') + '-' + (person.gender || 'unknown').toLowerCase();
+        el.className += ' ' + icon;
       }
-      else {
-        lifeSpan = person.lifeSpan;
+      personContainer.appendChild(el);
+
+      // add the person name
+      if (person.name) {
+        el = document.createElement('li');
+        el.className = 'person-name';
+        el.textContent = person.name;
+        docFrag.appendChild(el);
       }
 
-      el = document.createElement('li');
-      el.className = 'person-lifeSpan';
-      el.textContent = lifeSpan
-      docFrag.appendChild(el);
-    }
+      // add the lifespan
+      if (!options.hideLifeSpan && (person.fullLifeSpan || person.lifeSpan)) {
+        if (options.lifeSpan === 'full' && person.fullLifeSpan) {
+          lifeSpan = person.fullLifeSpan;
+        }
+        else {
+          lifeSpan = person.lifeSpan;
+        }
 
-    // add the pid
-    if (!options.hidePid && person.id) {
-      el = document.createElement('li');
-      el.className = 'person-id';
-      el.textContent = person.id;
-      docFrag.appendChild(el);
-    }
+        el = document.createElement('li');
+        el.className = 'person-lifeSpan';
+        el.textContent = lifeSpan
+        docFrag.appendChild(el);
+      }
 
-    personInfo.appendChild(docFrag);
-    personContainer.appendChild(personInfo);
+      // add the pid
+      if (!options.hidePid && person.id) {
+        el = document.createElement('li');
+        el.className = 'person-id';
+        el.textContent = person.id;
+        docFrag.appendChild(el);
+      }
+
+      personInfo.appendChild(docFrag);
+      personContainer.appendChild(personInfo);
+    }
+    // just add the gender div
+    else {
+      personContainer.appendChild(el);
+    }
 
     // container not null
     if ((container = $(container)).length) {
