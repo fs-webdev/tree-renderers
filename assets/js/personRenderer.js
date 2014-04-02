@@ -13,6 +13,7 @@ var treeRenderers = (function(module) {
    *
    * @type {object} options - How to display the person information.
    * @param {string}  [options.iconSize=medium] - Size of the gender icon (small,medium,large).
+   * @param {boolean} [options.hideIcon=false] - Hide the gender icon.
    * @param {boolean} [options.hideLifeSpan=false] - Hide the lifespan.
    * @param {string}  [options.lifeSpan=short] - Show the short or the full lifeSpan.
    * @param {boolean} [options.hidePid=false] - Hide the person id.
@@ -127,6 +128,7 @@ var treeRenderers = (function(module) {
    *
    * @type {object} options - How to display the person information.
    * @param {string}  [options.iconSize=medium] - Size of the gender icon (small,medium,large).
+   * @param {boolean} [options.hideIcon=false] - Hide the gender icon.
    * @param {boolean} [options.hideLifeSpan=false] - Hide the lifespan.
    * @param {string}  [options.lifeSpan=short] - Show the short or the full lifeSpan.
    * @param {boolean} [options.hidePid=false] - Hide the person id.
