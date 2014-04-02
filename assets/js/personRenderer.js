@@ -75,15 +75,15 @@ var treeRenderers = (function(module) {
     personContainer.appendChild(personInfo);
 
     // DOMElement
-    if (container.appendChild) {
+    if (container && container.appendChild) {
       container.appendChild(personContainer);
     }
     // jQueryElement
-    else if (container.append) {
+    else if (container && container.append) {
       container.append(personContainer);
     }
     // querySelector
-    else if (document.querySelector(container)) {
+    else if (container && document.querySelector(container)) {
       document.querySelector(container).appendChild(personContainer);
     }
     else {
@@ -127,17 +127,17 @@ var treeRenderers = (function(module) {
     coupleBottom.className += ' couple-wife';
 
     // DOMElement
-    if (container.appendChild) {
+    if (container && container.appendChild) {
       container.appendChild(coupleTop);
       container.appendChild(coupleBottom)
     }
     // jQueryElement
-    else if (container.append) {
+    else if (container && container.append) {
       container.append(coupleTop);
       container.append(coupleBottom)
     }
     // querySelector
-    else if (document.querySelector(container)) {
+    else if (container && document.querySelector(container)) {
       document.querySelector(container).appendChild(coupleTop);
       document.querySelector(container).appendChild(coupleBottom)
     }
