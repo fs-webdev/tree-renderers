@@ -32,13 +32,13 @@ var treeRenderers = (function(module) {
     personInfo.className = 'person-info';
 
     // add the gender icon
+    el = document.createElement('div');
+    el.className = 'person-gender-icon';
     if (!options.hideIcon) {
       icon = 'fs-icon-' + (options.iconSize || 'medium') + '-' + (person.gender || 'unknown').toLowerCase();
-
-      el = document.createElement('div');
-      el.className = 'person-gender-icon ' + icon;
-      personContainer.appendChild(el);
+      el.className += ' ' + icon;
     }
+    personContainer.appendChild(el);
 
     // add the person name
     if (person.name) {
