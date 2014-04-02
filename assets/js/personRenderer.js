@@ -17,6 +17,7 @@ var treeRenderers = (function(module) {
    * @param {string}  [options.lifeSpan=short] - Show the short or the full lifeSpan.
    * @param {boolean} [options.hidePid=false] - Hide the person id.
    * @param {boolean} [options.openPersonCard=false] - Add a link to open the person card when the name is clicked.
+   * @param {DOM tag} [options.nameWrapper] - Wrap the name in a DOM element (h1,h2,h3,h4,span,div).
    *
    * @returns {DOMElement} Returns the HTML if no container element is passed, otherwise returns nothing.
    */
@@ -26,7 +27,8 @@ var treeRenderers = (function(module) {
 
     var $personContainer = $('<div class="person-info-container"></div>');
     var $personInfo = $('<ul class="person-info"></ul>');
-    var icon, gender, lifeSpan, $el, $link;
+    var validNameWrappers = ['h1', 'h2', 'h3', 'h4', 'span', 'div'];
+    var icon, gender, lifeSpan, $el, $name, $link;
 
     // create the gender div
     $el = $('<div class="person-gender-icon"></div>');
@@ -44,9 +46,18 @@ var treeRenderers = (function(module) {
       if (person.name) {
         $el = $('<li class="person-name"></li>');
 
+        // only add valid name wrappers
+        if (options.nameWrapper && validNameWrappers.indexOf(options.nameWrapper) !== -1) {
+          $name = $('<' + nameWrapper + '></' + nameWrapper + '>');
+          $name.html(person.name);
+        }
+        else {
+          $name = person.name;
+        }
+
         // create the link to open the person card
         if (options.openPersonCard) {
-          $link = $('<a href="javascript:void(0);" data-cmd="openPersonCard">' + person.name + '</a>');
+          $link = $('<a href="javascript:void(0);" data-cmd="openPersonCard">' + $name + '</a>');
           $link.data('cmdData', {
             id: person.id,
             name: person.name,
@@ -55,7 +66,7 @@ var treeRenderers = (function(module) {
           $el.append($link);
         }
         else {
-          $el.html(person.name);
+          $el.html($name);
         }
         $personInfo.append($el);
       }
@@ -119,7 +130,8 @@ var treeRenderers = (function(module) {
    * @param {boolean} [options.hideLifeSpan=false] - Hide the lifespan.
    * @param {string}  [options.lifeSpan=short] - Show the short or the full lifeSpan.
    * @param {boolean} [options.hidePid=false] - Hide the person id.
-   * @param {string}  [options.returnType=html] - Specify the return type as HTML or string.
+   * @param {boolean} [options.openPersonCard=false] - Add a link to open the person card when the name is clicked.
+   * @param {string} [options.nameWrapper] - Wrap the name in a DOM element.
    *
    * @returns {DOMElement} Returns the HTML if no container element is passed, otherwise returns nothing.
    */
