@@ -36,7 +36,7 @@ var treeRenderers = (function(module) {
     $el = $('<div class="person-gender-icon"></div>');
 
     // only create the person if the object exists
-    if (person && Object.keys(person).length > 0) {
+    if (person && !$.isEmptyObject(person)) {
       // add the gender icon
       if (!options.hideIcon) {
         icon = 'fs-icon-' + (options.iconSize || 'medium') + '-' + (person.gender || 'unknown').toLowerCase();
