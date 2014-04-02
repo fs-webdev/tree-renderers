@@ -47,7 +47,7 @@ var treeRenderers = (function(module) {
         // create the link to open the person card
         if (options.openPersonCard) {
           $link = $('<a href="javascript:void(0);" data-cmd="openPersonCard">' + person.name + '</a>');
-          $link.data({
+          $link.data('cmdData', {
             id: person.id,
             name: person.name,
             gender: person.gender
