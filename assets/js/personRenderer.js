@@ -19,6 +19,7 @@ var treeRenderers = (function(module) {
    * @param {boolean} [options.hidePid=false] - Hide the person id.
    * @param {boolean} [options.openPersonCard=false] - Add a link to open the person card when the name is clicked.
    * @param {DOM tag} [options.nameWrapper] - Wrap the name in a DOM element (h1,h2,h3,h4,span,div).
+   * @param {string} [options.addSpouse] - String to place in the person-name li if a spouse will be added.
    *
    * @returns {DOMElement} Returns the HTML if no container element is passed, otherwise returns nothing.
    */
@@ -98,6 +99,12 @@ var treeRenderers = (function(module) {
       $personContainer.append($el);
     }
 
+    // add the add-spouse class
+    if (options.addSpouse) {
+      $personInfo.append($('<li class="person-name add-spouse">' + options.addSpouse + '</li>'))
+      personContainer.append($personInfo);
+    }
+
     // container not null
     if ((container = $(container)).length) {
       container.append($personContainer);
@@ -134,6 +141,7 @@ var treeRenderers = (function(module) {
    * @param {boolean} [options.hidePid=false] - Hide the person id.
    * @param {boolean} [options.openPersonCard=false] - Add a link to open the person card when the name is clicked.
    * @param {string} [options.nameWrapper] - Wrap the name in a DOM element.
+   * @param {string} [options.addSpouse] - String to place in the person-name li if a spouse will be added.
    *
    * @returns {DOMElement} Returns the HTML if no container element is passed, otherwise returns nothing.
    */
