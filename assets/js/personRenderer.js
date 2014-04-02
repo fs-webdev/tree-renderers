@@ -102,7 +102,7 @@ var treeRenderers = (function(module) {
     // add the add-spouse class
     if (options.addSpouse) {
       $personInfo.append($('<li class="person-name add-spouse">' + options.addSpouse + '</li>'))
-      personContainer.append($personInfo);
+      $personContainer.append($personInfo);
     }
 
     // container not null
