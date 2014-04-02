@@ -3,7 +3,7 @@ tree-renderers
 
 Set of shared renderers used by the tree team.
 
-For an example of the output, see [https://familysearch.org/tree/styleguide#person-information]().
+For an example of the output, see the [styleguide page](https://familysearch.org/tree/styleguide#person-information).
 
 Setup
 ======
