@@ -112,8 +112,8 @@ var treeRenderers = (function(module) {
    * @returns {DOMElement} Returns the HTML if no container element is passed, otherwise returns nothing.
    */
   module.renderCouple = function(container, person1, person2, options) {
-    var coupleTop = this.renderPerson(person1, options);
-    var coupleBottom = this.renderPerson(person2, options);
+    var coupleTop = this.renderPerson(null, person1, options);
+    var coupleBottom = this.renderPerson(null, person2, options);
 
     coupleTop.className += ' couple-husband';
     coupleBottom.className += ' couple-wife';
