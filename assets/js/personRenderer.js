@@ -1,3 +1,5 @@
+'use strict'
+
 window.treeRenderers = (function(module) {
 
   /**
