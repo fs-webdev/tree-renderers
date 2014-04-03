@@ -235,6 +235,18 @@ height:90px;
     &[class*=fs-icon-small] {
       vertical-align: top;
       margin-top: 4px;
+
+      .person-info {
+      	width: 90%;
+      }
+    }
+
+    &[class*=fs-icon-medium] .person-info {
+    	width: 90%
+    }
+
+    &[class*=fs-icon-large] .person-info {
+    	width: 75%;
     }
   }
 
@@ -244,7 +256,6 @@ height:90px;
     list-style: none;
     display: inline-block;
     vertical-align: middle;
-    width: 90%;
 
     clearfix();
   }
