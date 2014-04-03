@@ -1,4 +1,4 @@
-var treeRenderers = (function(module) {
+window.treeRenderers = (function(module) {
 
   /**
    * Render a person.
@@ -167,4 +167,4 @@ var treeRenderers = (function(module) {
   };
 
   return module;
-})(treeRenderers || {});
+})(window.treeRenderers || {});
