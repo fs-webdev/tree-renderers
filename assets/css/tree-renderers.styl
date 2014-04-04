@@ -1,4 +1,18 @@
 /***********************************************************************/
+/* VARIABLES
+/***********************************************************************/
+
+/*
+ * FONTS
+ */
+$small-size = 14px;
+$small-lineHieght = 20px;
+
+$medium-size = 16px;
+$medium-lineHieght = 24px;
+
+
+/***********************************************************************/
 /* MIXINS / FUNCTIONS
 /***********************************************************************/
 
@@ -53,6 +67,7 @@ clearfix()
     display: table
   &:after
     clear: both
+
 
 /***********************************************************************/
 /* STYLES
@@ -221,7 +236,6 @@ height:90px;
  *  </div>
  */
 .person-info-container {
-  line-height: 1;
 
   .person-gender-icon {
 
@@ -260,15 +274,10 @@ height:90px;
     clearfix();
   }
 
-  .person-name,
-  .person-lifeSpan,
-  .person-id {
-    line-height: 1;
-    font-size: 16px;
-  }
-
   .person-name {
     overflow: ellipsis;
+    font-size: $medium-size;
+    line-height: $medium-lineHieght;
 
     & > h1,& > h2,& > h3,& > h4 {
       padding: 0;
@@ -278,6 +287,8 @@ height:90px;
   .person-lifeSpan,
   .person-id, {
     float: left;
+    font-size: $small-size;
+    line-height: $small-lineHieght;
   }
 
   .person-lifeSpan:not(:empty) + .person-id:not(:empty):before {
