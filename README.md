@@ -8,7 +8,7 @@ For an example of the output, see the [styleguide page](https://familysearch.org
 Setup
 ======
 
-Add the assets you want to use to your ejs file that will display the popup menu or modal:
+Add the assets you want to use to your ejs file that will use the renderer.
 
     // render a person
     assets.js.push('personRenderer.js');
