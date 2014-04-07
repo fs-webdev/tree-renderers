@@ -2,9 +2,6 @@
 /* VARIABLES
 /***********************************************************************/
 
-/*
- * FONTS
- */
 $small-size = 14px;
 $small-lineHieght = 20px;
 
@@ -16,41 +13,6 @@ $medium-lineHieght = 24px;
 /* MIXINS / FUNCTIONS
 /***********************************************************************/
 
-/*
- * VENDOR PREFIXES
- */
-box-shadow() {
-  -webkit-box-shadow: arguments;
-          box-shadow: arguments;
-}
-
-border-box() {
-  -webkit-box-sizing: arguments;
-     -moz-box-sizing: arguments;
-          box-sizing: arguments;
-}
-
-user-select() {
-  -webkit-user-select: arguments;
-   -khtml-user-select: arguments;
-     -moz-user-select: arguments;
-      -ms-user-select: arguments;
-          user-select: arguments;
-}
-
-background-image() {
-  // add linear gradient vendor prefixes
-  if match('-gradient\(', '' + arguments) {
-    background-image: s('-webkit-%s', arguments);
-    background-image: s('-moz-%s', arguments);
-  }
-
-  background-image: arguments;
-}
-
-/*
- * UTILITIES
- */
 // taken from the nib.styl library
 overflow()
   if arguments[0] == ellipsis
