@@ -2,6 +2,15 @@
 
 window.treeRenderers = (function(module) {
 
+  // ensure that module.lang is an object
+  module.lang = module.lang || {
+    unknownName: '[Unknown Name]'
+  };
+
+  if (Object.prototype.toString.call(module.lang) !== '[object Object]') {
+    throw new Error('treeRenderers.lang must be an object.');
+  }
+
   /**
    * Render a person.
    * @param {[DOMElement, jQueryElement, querySelector]} container - Parent element to append the person information to.
@@ -29,6 +38,12 @@ window.treeRenderers = (function(module) {
     var person = person || {};
     var options = options || {};
 
+    // set defaults
+    if (person.id && !person.name) {
+      person.name = this.lang.unknownName;
+    }
+    person.gender = person.gender || 'unknown';
+
     var $personContainer = $('<div class="person-info-container"></div>');
     var $personInfo = $('<ul class="person-info"></ul>');
     var validNameWrappers = ['h1', 'h2', 'h3', 'h4', 'span', 'div'];
@@ -38,10 +53,10 @@ window.treeRenderers = (function(module) {
     $el = $('<div class="person-gender-icon"></div>');
 
     // only create the person if the object exists
-    if (person && !$.isEmptyObject(person)) {
+    if (!$.isEmptyObject(person)) {
       // add the gender icon
       if (!options.hideIcon) {
-        icon = 'fs-icon-' + (options.iconSize || 'medium') + '-' + (person.gender || 'unknown').toLowerCase();
+        icon = 'fs-icon-' + (options.iconSize || 'medium') + '-' + person.gender.toLowerCase();
         $el.addClass(icon);
       }
       $personContainer.append($el);
@@ -160,11 +175,11 @@ window.treeRenderers = (function(module) {
       container.append(coupleBottom)
     }
     else {
-      var el = document.createElement('div');
-      el.appendChild(coupleTop);
-      el.appendChild(coupleBottom);
+      var $el = $('<div class="couple-container"></div');
+      $el.append(coupleTop);
+      $el.append(coupleBottom);
 
-      return el;
+      return $el[0];
     }
   };
 
