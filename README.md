@@ -14,6 +14,19 @@ Add the assets you want to use to your ejs file that will use the renderer.
     assets.js.push('personRenderer.js');
     assets.css.push('tree-renderers.styl');
 
+Set the language object in the ejs file that will use the renderer.
+
+    /**
+     * Needed language strings:
+     *   unknownName
+     */
+    window.treeRenderers = (function(module) {
+      module.lang = {
+        unknownName: "<%- i18n('unknownName') %>"
+      };
+      return module;
+    })(window.treeRenderers || {});
+
 Person Renderer
 ===============================
 
