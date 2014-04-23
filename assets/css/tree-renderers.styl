@@ -198,31 +198,46 @@ height:90px;
  *  </div>
  */
 .person-info-container {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+
+  // couple relationship
+  &.couple-husband .person-gender-container,
+  &.couple-wife .person-gender-container {
+    width: 5px;
+  }
+
+  .person-gender-container {
+    display: table-cell;
+    width: 0;
+
+    &.small {
+      width: 15px;
+    }
+
+    &.medium {
+      vertical-align: middle;
+      width: 30px;
+    }
+
+    &.large {
+      vertical-align: middle;
+      width: 100px;
+    }
+  }
 
   .person-gender-icon {
 
     &[class*=fs-icon-] {
       display: inline-block;
       vertical-align: middle;
-      margin-right: 6px;
       position: relative;
     }
 
     &[class*=fs-icon-small] {
       vertical-align: top;
       margin-top: 7px;
-
-      + .person-info {
-        width: 90%;
-      }
-    }
-
-    &[class*=fs-icon-medium] + .person-info {
-      width: 90%
-    }
-
-    &[class*=fs-icon-large] + .person-info {
-      width: 75%;
     }
   }
 
@@ -230,7 +245,7 @@ height:90px;
     padding: 0;
     margin: 0;
     list-style: none;
-    display: inline-block;
+    display: table-cell;
     vertical-align: middle;
 
     clearfix();

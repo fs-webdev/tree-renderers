@@ -42,7 +42,7 @@ window.treeRenderers = (function(module) {
     if (person.id && !person.name) {
       person.name = this.lang.unknownName;
     }
-    person.gender = person.gender || 'unknown';
+    options.iconSize = options.iconSize || 'medium'
 
     var $personContainer = $('<div class="person-info-container"></div>');
     var $personInfo = $('<ul class="person-info"></ul>');
@@ -50,16 +50,21 @@ window.treeRenderers = (function(module) {
     var icon, gender, lifeSpan, $el, $name, $link;
 
     // create the gender div
+    var $genderContainer = $('<div class="person-gender-container ' + (!options.hideIcon ? options.iconSize : '') + '"></div>');
+    $personContainer.append($genderContainer);
+
     $el = $('<div class="person-gender-icon"></div>');
 
     // only create the person if the object exists
     if (!$.isEmptyObject(person)) {
+      person.gender = person.gender || 'unknown';
+
       // add the gender icon
       if (!options.hideIcon) {
-        icon = 'fs-icon-' + (options.iconSize || 'medium') + '-' + person.gender.toLowerCase();
+        icon = 'fs-icon-' + options.iconSize + '-' + person.gender.toLowerCase();
         $el.addClass(icon);
       }
-      $personContainer.append($el);
+      $genderContainer.append($el);
 
       // add the person name
       if (person.name) {
@@ -113,7 +118,7 @@ window.treeRenderers = (function(module) {
     }
     // just add the gender div
     else {
-      $personContainer.append($el);
+      $genderContainer.append($el);
     }
 
     // add the add-spouse class
