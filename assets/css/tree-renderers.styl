@@ -262,17 +262,11 @@ height:90px;
     }
   }
   .person-lifeSpan,
-  .person-id, {
+  .person-id,
+  .person-separator {
     float: left;
     font-size: $small-size;
     line-height: $small-lineHieght;
-  }
-
-  .person-lifeSpan:not(:empty) + .person-id:not(:empty):before {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 8px 3px 8px;
-    content: '\2022';
   }
 
   // couple relationships

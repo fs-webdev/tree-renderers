@@ -45,7 +45,7 @@ window.treeRenderers = (function(module) {
     options.iconSize = options.iconSize || 'medium'
 
     var $personContainer = $('<div class="person-info-container"></div>');
-    var $personInfo = $('<ul class="person-info"></ul>');
+    var $personInfo = $('<div class="person-info"></div>');
     var validNameWrappers = ['h1', 'h2', 'h3', 'h4', 'span', 'div'];
     var icon, gender, lifeSpan, $el, $name, $link;
 
@@ -68,7 +68,7 @@ window.treeRenderers = (function(module) {
 
       // add the person name
       if (person.name) {
-        $el = $('<li class="person-name"></li>');
+        $el = $('<div class="person-name"></div>');
 
         // only add valid name wrappers
         if (options.nameWrapper && validNameWrappers.indexOf(options.nameWrapper) !== -1) {
@@ -104,13 +104,17 @@ window.treeRenderers = (function(module) {
           lifeSpan = person.lifeSpan;
         }
 
-        $el = $('<li class="person-lifeSpan">' + lifeSpan + '</li>');
+        $el = $('<span class="person-lifeSpan">' + lifeSpan + '</span>');
         $personInfo.append($el);
+      }
+
+      if (!options.hideLifeSpan && !options.hidePid) {
+        $personInfo.append('<span class="person-separator">&nbsp;&bull;&nbsp;</span>');
       }
 
       // add the pid
       if (!options.hidePid && person.id) {
-        $el = $('<li class="person-id">' + person.id + '</li>');
+        $el = $('<span class="person-id">' + person.id + '</span>');
         $personInfo.append($el);
       }
 
@@ -123,7 +127,7 @@ window.treeRenderers = (function(module) {
 
     // add the add-spouse class
     if (options.addSpouse) {
-      $personInfo.append($('<li class="person-name add-spouse">' + options.addSpouse + '</li>'))
+      $personInfo.append($('<span class="person-name add-spouse">' + options.addSpouse + '</span>'))
       $personContainer.append($personInfo);
     }
 
