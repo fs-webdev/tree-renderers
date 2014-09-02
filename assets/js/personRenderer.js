@@ -39,7 +39,7 @@ window.treeRenderers = (function(module) {
     var options = options || {};
 
     // set defaults
-    if (person.id && !person.name) {
+    if (person.id && (!person.name || !person.name.trim())) {
       person.name = this.lang.unknownName;
     }
     options.iconSize = options.iconSize || 'medium'
